@@ -2,8 +2,6 @@ import React from 'react';
 
 import './App.scss';
 
-// Let's talk about using index.js and some other name in the component folder
-// There's pros and cons for each way of doing this ...
 import Header from './Components/Header';
 import Footer from './Components/Footer';
 import Form from './Components/Form';
