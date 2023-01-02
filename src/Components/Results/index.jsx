@@ -1,7 +1,7 @@
 import React from 'react';
+import './results.scss';
 
 const Results = (props) => {
-
   return (
     <>
       <section>
@@ -13,6 +13,6 @@ const Results = (props) => {
       </section>
     </>
   );
-};
+}
 
 export default Results;
