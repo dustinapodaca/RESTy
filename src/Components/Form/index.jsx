@@ -7,7 +7,7 @@ const Form = (props) => {
   const { handleApiCall } = props;
   const [method, setMethod] = useState('GET');
   const [url, setUrl] = useState('');
-  const [body, setBody] = useState('');
+  const [body, setBody] = useState({});
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -21,7 +21,7 @@ const Form = (props) => {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
+      <form data-testid="form" onSubmit={handleSubmit}>
         <label className="methods">
           <span>Method: </span>
           <button
@@ -60,6 +60,7 @@ const Form = (props) => {
         <label>
           <span>URL: </span>
           <input
+            data-testid="input"
             name="url"
             type="text"
             value={url}
@@ -80,7 +81,7 @@ const Form = (props) => {
         ) : (
           <></>
         )}
-        <button type="submit">GO!</button>
+        <button data-testid="submitButton" type="submit">GO!</button>
       </form>
     </>
   );
