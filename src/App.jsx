@@ -1,36 +1,59 @@
 import React from 'react';
-import './App.scss';
 import axios from 'axios';
+import './App.scss';
 
 import Header from './Components/Header';
 import Footer from './Components/Footer';
 import Form from './Components/Form';
 import Results from './Components/Results';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const App = () => {
   const [resData, setResData] = useState(null);
   const [reqParams, setReqParams] = useState({});
   const [loading, setLoading] = useState(false);
 
-  const callApi = async (reqParams) => {
+  useEffect(() => {
+    if (reqParams.url) {
+      callApi(reqParams);
+    }
+  }, [reqParams]);
 
-    const { method, url, body } = reqParams;
+  const updateReqParams = (reqParams) => {
     setReqParams(reqParams);
+  }
+  
+  async function callApi (reqParams) {
+    const { method, url, body } = reqParams;
     setLoading(true);
     
-    const resData = await axios({
-      method,
-      url,
-      data: body,
-    });
+    console.log('method', method);
+
+    try {
+      if (!method || !url) {
+        throw new Error('ERROR: Request is not defined, please enter a URL and choose a method.');
+      } else if ((method === 'POST' || method === 'PUT') && !body) {
+        throw new Error(
+          "ERROR: Request Body is not defined, please enter a JSON Request Body and try again."
+        );
+      } else {
+        const res = await axios({
+          method,
+          url,
+          data: body,
+        });
+        setResData({
+          headers: res.headers,
+          body: res.data,
+        });
     
-    setResData({
-      headers: resData.headers,
-      body: resData.data,
-    });
-    setLoading(false);
+        setLoading(false);
+      }
+
+    } catch(e) {
+      console.log(e);
+    }
   }
 
   return (
@@ -38,7 +61,7 @@ const App = () => {
       <Header />
       <div>Request Method: {reqParams.method}</div>
       <div>URL: {reqParams.url}</div>
-      <Form handleApiCall={callApi} />
+      <Form updateReqParams={updateReqParams} />
       <Results data={resData} loading={loading} />
       <Footer />
     </React.Fragment>

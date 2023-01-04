@@ -1,4 +1,5 @@
 import React from 'react';
+import { prettyPrintJson } from "pretty-print-json";
 import './results.scss';
 
 const Results = (props) => {
@@ -6,21 +7,21 @@ const Results = (props) => {
 
   return (
     <>
-    {loading ? (
-      <>
-        <p>Loading....</p>
-      </>
-    ) : (
-      <>
-        <section>
-          <pre>
-            {data
-              ? JSON.stringify(data, null, 2)
-              : null}
-          </pre>
-        </section>
-      </>
-    )}
+      {loading ? (
+        <>
+          <p>Loading....</p>
+        </>
+      ) : (
+        <>
+          <section>
+          {data ? (
+            <>
+              <pre dangerouslySetInnerHTML={{ __html: prettyPrintJson.toHtml([data], null, 2) }} />
+            </>
+          ) : null}
+          </section>
+        </>
+      )}
     </>
   );
 }

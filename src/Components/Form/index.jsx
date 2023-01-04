@@ -3,11 +3,11 @@ import './form.scss';
 import { useState } from 'react';
 
 const Form = (props) => {
-
-  const { handleApiCall } = props;
   const [method, setMethod] = useState('GET');
   const [url, setUrl] = useState('');
   const [body, setBody] = useState({});
+  
+  const { updateReqParams } = props;
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -16,7 +16,8 @@ const Form = (props) => {
       url: url,
       body: body,
     };
-    handleApiCall(formData);
+
+    updateReqParams(formData);
   }
 
   return (
