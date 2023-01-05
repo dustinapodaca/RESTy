@@ -27,7 +27,7 @@ const App = () => {
   async function callApi (reqParams) {
     const { method, url, body } = reqParams;
     setLoading(true);
-    
+
     console.log('method', method);
 
     try {
@@ -62,7 +62,7 @@ const App = () => {
       <div>Request Method: {reqParams.method}</div>
       <div>URL: {reqParams.url}</div>
       <Form updateReqParams={updateReqParams} />
-      <Results data={resData} loading={loading} />
+      <Results data={resData} loading={loading} data-testid='jsonBody' />
       <Footer />
     </React.Fragment>
   );

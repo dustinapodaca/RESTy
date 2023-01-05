@@ -6,7 +6,7 @@ const Form = (props) => {
   const [method, setMethod] = useState('GET');
   const [url, setUrl] = useState('');
   const [body, setBody] = useState({});
-  
+
   const { updateReqParams } = props;
 
   const handleSubmit = (e) => {
@@ -27,6 +27,7 @@ const Form = (props) => {
           <span>Method: </span>
           <button
             id="get"
+            data-testid="selectGet"
             className={method === "GET" ? "active" : null}
             type="button"
             onClick={() => setMethod("GET")}
@@ -35,6 +36,7 @@ const Form = (props) => {
           </button>
           <button
             id="post"
+            data-testid="selectPost"
             className={method === "POST" ? "active" : null}
             type="button"
             onClick={() => setMethod("POST")}
@@ -73,8 +75,10 @@ const Form = (props) => {
             <label>
               <span>JSON Request Body: </span>
               <textarea
+                data-testid="jsonBody"
                 name="body"
                 rows={6}
+                value={body}
                 onChange={(e) => setBody(e.target.value)}
               />
             </label>
@@ -82,7 +86,9 @@ const Form = (props) => {
         ) : (
           <></>
         )}
-        <button data-testid="submitButton" type="submit">GO!</button>
+        <button data-testid="submitButton" type="submit">
+          GO!
+        </button>
       </form>
     </>
   );

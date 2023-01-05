@@ -14,11 +14,16 @@ const Results = (props) => {
       ) : (
         <>
           <section>
-          {data ? (
-            <>
-              <pre dangerouslySetInnerHTML={{ __html: prettyPrintJson.toHtml([data], null, 2) }} />
-            </>
-          ) : null}
+            {data ? (
+              <>
+                <pre
+                  data-testid="results"
+                  dangerouslySetInnerHTML={{
+                    __html: prettyPrintJson.toHtml([data], null, 2),
+                  }}
+                />
+              </>
+            ) : null}
           </section>
         </>
       )}
