@@ -75,10 +75,9 @@ const Form = (props) => {
             <label>
               <span>JSON Request Body: </span>
               <textarea
-                data-testid="jsonBody"
                 name="body"
                 rows={6}
-                value={body}
+                value={body.data}
                 onChange={(e) => setBody(e.target.value)}
               />
             </label>
